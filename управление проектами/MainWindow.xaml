@@ -1,0 +1,35 @@
+﻿<Window x:Class="управление_проектами.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:управление_проектами"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Background="NavajoWhite"></StackPanel>
+        <StackPanel Grid.Row="0">
+            <Image Source="/Resources/1209347.png"  Width="60"
+                   HorizontalAlignment="Left" Margin="5" VerticalAlignment="Center" />
+        </StackPanel>
+        <StackPanel Grid.Row="0" Orientation="Vertical">
+
+            <TextBlock Text="Ковер-Самолет" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                   FontSize="25">
+            </TextBlock>
+            <TextBlock Text="Магазин ковров" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                   FontSize="16">
+            </TextBlock>
+        </StackPanel>
+        <StackPanel>
+            <Button x:Name="btnback" Grid.Row="0" Height="30" Width="60" HorizontalAlignment="Right" Margin="7" Background="#ffbc91" 
+                BorderBrush="#ffbc69" Content="назад" Click="btnback_Click"></Button>
+        </StackPanel>
+        
+        <Frame Grid.Row="1" Name="Frame_" NavigationUIVisibility="Hidden" ContentRendered="Frame__ContentRendered"></Frame>
+    </Grid>
+</Window>

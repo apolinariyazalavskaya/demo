@@ -1,0 +1,83 @@
+﻿<Page x:Class="управление_проектами.pages_new.PageCatalog"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:управление_проектами.pages_new"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageCatalog">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="capket" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel >
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="20" Width="300">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image Width="240" Grid.Row="0" Stretch="Uniform" HorizontalAlignment="Center" Margin="5"
+                               Source="{Binding Path=GetPhoto}"/>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" >
+                            
+                           <TextBlock Text="{Binding название}" Height="auto" FontWeight="Bold" 
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" >
+                            <TextBlock Padding="3" Height="auto">
+                               Цена: 
+                            </TextBlock>
+                            <TextBlock Text="{Binding цена, StringFormat='c', ConverterCulture='ru-RU'}" 
+                                       Height="auto" FontWeight="Bold"  VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="3" Orientation="Horizontal">
+                            <TextBlock Padding="3" Height="auto">
+                               Длина изделия: 
+                            </TextBlock>
+                            <TextBlock Text="{Binding длина}" Height="auto" VerticalAlignment="Center" FontWeight="Bold"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="4" Orientation="Horizontal" >
+                            <TextBlock Padding="3" Height="auto">
+                              Ширина изделия: 
+                            </TextBlock>
+                            <TextBlock Text="{Binding ширина}" 
+                                       Height="auto" FontWeight="Bold"  VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="5" Orientation="Horizontal" >
+                            <TextBlock Padding="3" Height="auto">
+                               Используемая ткань: 
+                            </TextBlock>
+                            <TextBlock Text="{Binding запас_ткани.основной_состав}" 
+                                       Height="auto"  FontWeight="Bold"  VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="6" Orientation="Horizontal" >
+                            <TextBlock Padding="3" Height="auto">
+                               Основная пряжа: 
+                            </TextBlock>
+                            <TextBlock Text="{Binding запас_пряжи.основной_состав}" 
+                                       Height="auto"  FontWeight="Bold"  VerticalAlignment="Center" />
+                        </StackPanel>
+                       
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Grid>
+</Page>

@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="ассортимент">
+    <Key>
+      <PropertyRef Name="ID_товара" />
+    </Key>
+    <Property Name="ID_товара" Type="Int32" Nullable="false" />
+    <Property Name="название" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="фото" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="длина" Type="Double" Nullable="false" />
+    <Property Name="ширина" Type="Double" Nullable="false" />
+    <Property Name="пряжа" Type="Int32" Nullable="false" />
+    <Property Name="ткань" Type="Int32" Nullable="false" />
+    <Property Name="цена" Type="Double" Nullable="false" />
+    <NavigationProperty Name="запас_пряжи" Relationship="Self.FK_ассортимент_запас_пряжи" FromRole="ассортимент" ToRole="запас_пряжи" />
+    <NavigationProperty Name="запас_ткани" Relationship="Self.FK_ассортимент_запас_ткани" FromRole="ассортимент" ToRole="запас_ткани" />
+    <NavigationProperty Name="заказ" Relationship="Self.FK_заказ_ассортимент" FromRole="ассортимент" ToRole="заказ" />
+  </EntityType>
+  <EntityType Name="заказ">
+    <Key>
+      <PropertyRef Name="ID_заказа" />
+    </Key>
+    <Property Name="ID_заказа" Type="Int32" Nullable="false" />
+    <Property Name="клиент" Type="Int32" Nullable="false" />
+    <Property Name="работник" Type="Int32" Nullable="false" />
+    <Property Name="товар" Type="Int32" Nullable="false" />
+    <Property Name="дата_заказа" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="ассортимент" Relationship="Self.FK_заказ_ассортимент" FromRole="заказ" ToRole="ассортимент" />
+    <NavigationProperty Name="клиенты" Relationship="Self.FK_заказ_клиенты" FromRole="заказ" ToRole="клиенты" />
+    <NavigationProperty Name="работники" Relationship="Self.FK_заказ_работники" FromRole="заказ" ToRole="работники" />
+  </EntityType>
+  <EntityType Name="запас_пряжи">
+    <Key>
+      <PropertyRef Name="ID_пряжи" />
+    </Key>
+    <Property Name="ID_пряжи" Type="Int32" Nullable="false" />
+    <Property Name="название" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="цена_за_метр" Type="Double" Nullable="false" />
+    <Property Name="цвет" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="количество" Type="Double" Nullable="false" />
+    <Property Name="плотность" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="основной_состав" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ассортимент" Relationship="Self.FK_ассортимент_запас_пряжи" FromRole="запас_пряжи" ToRole="ассортимент" />
+  </EntityType>
+  <EntityType Name="запас_ткани">
+    <Key>
+      <PropertyRef Name="ID_ткани" />
+    </Key>
+    <Property Name="ID_ткани" Type="Int32" Nullable="false" />
+    <Property Name="название" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="цена_за_метр" Type="Double" Nullable="false" />
+    <Property Name="цвет" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="количество" Type="Double" Nullable="false" />
+    <Property Name="плотность" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="основной_состав" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ассортимент" Relationship="Self.FK_ассортимент_запас_ткани" FromRole="запас_ткани" ToRole="ассортимент" />
+  </EntityType>
+  <EntityType Name="клиенты">
+    <Key>
+      <PropertyRef Name="ID_клиента" />
+    </Key>
+    <Property Name="ID_клиента" Type="Int32" Nullable="false" />
+    <Property Name="фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="имя" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="номер_телефона" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="город_доставки" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="улица_доставки" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="дом_доставки" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="квартира_доставки" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="количество_купленных_товаров" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="заказ" Relationship="Self.FK_заказ_клиенты" FromRole="клиенты" ToRole="заказ" />
+  </EntityType>
+  <EntityType Name="работники">
+    <Key>
+      <PropertyRef Name="ID_работника" />
+    </Key>
+    <Property Name="ID_работника" Type="Int32" Nullable="false" />
+    <Property Name="фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="имя" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="серия_номер_паспорта" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="дата_рождения" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="пол" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="должность" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="квалификация" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="номер_телефона" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="заказ" Relationship="Self.FK_заказ_работники" FromRole="работники" ToRole="заказ" />
+  </EntityType>
+  <Association Name="FK_ассортимент_запас_пряжи">
+    <End Role="запас_пряжи" Type="Self.запас_пряжи" Multiplicity="1" />
+    <End Role="ассортимент" Type="Self.ассортимент" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="запас_пряжи">
+        <PropertyRef Name="ID_пряжи" />
+      </Principal>
+      <Dependent Role="ассортимент">
+        <PropertyRef Name="пряжа" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ассортимент_запас_ткани">
+    <End Role="запас_ткани" Type="Self.запас_ткани" Multiplicity="1" />
+    <End Role="ассортимент" Type="Self.ассортимент" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="запас_ткани">
+        <PropertyRef Name="ID_ткани" />
+      </Principal>
+      <Dependent Role="ассортимент">
+        <PropertyRef Name="ткань" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_заказ_ассортимент">
+    <End Role="ассортимент" Type="Self.ассортимент" Multiplicity="1" />
+    <End Role="заказ" Type="Self.заказ" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ассортимент">
+        <PropertyRef Name="ID_товара" />
+      </Principal>
+      <Dependent Role="заказ">
+        <PropertyRef Name="товар" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_заказ_клиенты">
+    <End Role="клиенты" Type="Self.клиенты" Multiplicity="1" />
+    <End Role="заказ" Type="Self.заказ" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="клиенты">
+        <PropertyRef Name="ID_клиента" />
+      </Principal>
+      <Dependent Role="заказ">
+        <PropertyRef Name="клиент" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_заказ_работники">
+    <End Role="работники" Type="Self.работники" Multiplicity="1" />
+    <End Role="заказ" Type="Self.заказ" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="работники">
+        <PropertyRef Name="ID_работника" />
+      </Principal>
+      <Dependent Role="заказ">
+        <PropertyRef Name="работник" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="БД_производстваEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="ассортимент" EntityType="Self.ассортимент" />
+    <EntitySet Name="заказ" EntityType="Self.заказ" />
+    <EntitySet Name="запас_пряжи" EntityType="Self.запас_пряжи" />
+    <EntitySet Name="запас_ткани" EntityType="Self.запас_ткани" />
+    <EntitySet Name="клиенты" EntityType="Self.клиенты" />
+    <EntitySet Name="работники" EntityType="Self.работники" />
+    <AssociationSet Name="FK_ассортимент_запас_пряжи" Association="Self.FK_ассортимент_запас_пряжи">
+      <End Role="запас_пряжи" EntitySet="запас_пряжи" />
+      <End Role="ассортимент" EntitySet="ассортимент" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ассортимент_запас_ткани" Association="Self.FK_ассортимент_запас_ткани">
+      <End Role="запас_ткани" EntitySet="запас_ткани" />
+      <End Role="ассортимент" EntitySet="ассортимент" />
+    </AssociationSet>
+    <AssociationSet Name="FK_заказ_ассортимент" Association="Self.FK_заказ_ассортимент">
+      <End Role="ассортимент" EntitySet="ассортимент" />
+      <End Role="заказ" EntitySet="заказ" />
+    </AssociationSet>
+    <AssociationSet Name="FK_заказ_клиенты" Association="Self.FK_заказ_клиенты">
+      <End Role="клиенты" EntitySet="клиенты" />
+      <End Role="заказ" EntitySet="заказ" />
+    </AssociationSet>
+    <AssociationSet Name="FK_заказ_работники" Association="Self.FK_заказ_работники">
+      <End Role="работники" EntitySet="работники" />
+      <End Role="заказ" EntitySet="заказ" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
